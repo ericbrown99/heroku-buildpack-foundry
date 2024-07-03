@@ -5,10 +5,7 @@ set -e
 # Output messages to the user
 echo "-----> Installing Foundry"
 
-# Ensure the required dependencies are installed
-apt-get update && apt-get install -y curl
-
-# Install Foundry
+# Install Foundry without using apt-get
 curl -L https://foundry.paradigm.xyz | bash
 
 # Add Foundry to PATH
@@ -19,8 +16,5 @@ foundryup --version
 
 # Ensure the binaries are available
 foundryup
-
-# Cleanup
-apt-get clean
 
 echo "-----> Foundry installation complete"
