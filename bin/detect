@@ -1,0 +1,5 @@
+#!/bin/sh
+
+   # Exit with 0 if the buildpack should be used, 1 otherwise
+   # For now, we'll always use this buildpack if it's specified
+   exit 0
