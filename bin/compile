@@ -11,10 +11,7 @@ curl -L https://foundry.paradigm.xyz | bash
 # Add Foundry to PATH
 export PATH="$HOME/.foundry/bin:$PATH"
 
-# Verify installation
-foundryup --version
-
-# Ensure the binaries are available
-foundryup
+# Run foundryup to install Foundry components
+$HOME/.foundry/bin/foundryup
 
 echo "-----> Foundry installation complete"
