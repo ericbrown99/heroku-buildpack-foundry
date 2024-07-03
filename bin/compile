@@ -1,18 +1,26 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-# This script will be saved as bin/compile in your buildpack repository
+set -e
 
+# Output messages to the user
 echo "-----> Installing Foundry"
-BUILD_DIR=$1
-CACHE_DIR=$2
 
-# Download and install Foundry
+# Ensure the required dependencies are installed
+apt-get update && apt-get install -y curl
+
+# Install Foundry
 curl -L https://foundry.paradigm.xyz | bash
 
-# Add Foundry to the PATH
-echo "-----> Adding Foundry to PATH"
-PROFILE_PATH="$BUILD_DIR/.profile.d/foundry.sh"
-mkdir -p $(dirname $PROFILE_PATH)
-echo 'export PATH="$HOME/.foundry/bin:$PATH"' >> $PROFILE_PATH
+# Add Foundry to PATH
+export PATH="$HOME/.foundry/bin:$PATH"
 
-echo "-----> Foundry installation completed"
+# Verify installation
+foundryup --version
+
+# Ensure the binaries are available
+foundryup
+
+# Cleanup
+apt-get clean
+
+echo "-----> Foundry installation complete"

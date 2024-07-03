@@ -1,0 +1,5 @@
+buildpack = "Custom Foundry Build Pack"
+version = "0.1.0"
+
+[metadata]
+include_files = ["bin/compile"]
