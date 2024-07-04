@@ -12,8 +12,17 @@ if [ ! -d "$HOME/.foundry/bin" ]; then
   mkdir -p $HOME/.foundry/bin
 fi
 
-# Run foundryup to install Foundry components
-curl -L https://foundry.paradigm.xyz/foundryup | tar -xzC $HOME/.foundry/bin
+# Download foundryup to a temporary file
+curl -L https://foundry.paradigm.xyz/foundryup -o /tmp/foundryup
+
+# Check if the file is in gzip format
+file /tmp/foundryup
+
+# List the contents of the temporary directory
+ls -l /tmp
+
+# Attempt to extract the file
+tar -xzC $HOME/.foundry/bin -f /tmp/foundryup
 
 # Verify the installation
 if [ $? -ne 0 ]; then
