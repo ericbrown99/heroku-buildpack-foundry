@@ -1,7 +1,3 @@
-#!/usr/bin/env bash
-
-set -e
-
 # Output messages to the user
 echo "-----> Installing Foundry"
 
@@ -11,7 +7,18 @@ curl -L https://foundry.paradigm.xyz | bash
 # Add Foundry to PATH
 export PATH="$HOME/.foundry/bin:$PATH"
 
-# Run foundryup to install Foundry components
-$HOME/.foundry/bin/foundryup
+# Check if the foundry directory exists
+if [ ! -d "$HOME/.foundry/bin" ]; then
+  mkdir -p $HOME/.foundry/bin
+fi
 
-echo "-----> Foundry installation complete"
+# Run foundryup to install Foundry components
+curl -L https://foundry.paradigm.xyz/foundryup | tar -xzC $HOME/.foundry/bin
+
+# Verify the installation
+if [ $? -ne 0 ]; then
+  echo "Error: Foundry installation failed"
+  exit 1
+else
+  echo "Foundry installation completed successfully"
+fi
